@@ -21,6 +21,6 @@ To run just type,
 make all
 ```
 
-#Demo
+## Demo
 
 ![Demo_gif](https://raw.githubusercontent.com/answarck/Conway-s-Game-of-Life_SDL2/refs/heads/main/demo.gif)

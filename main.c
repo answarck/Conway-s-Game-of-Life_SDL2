@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #define SCREEN_WIDTH 1000
 #define SCREEN_HEIGHT 1000
-#define CELL_SIZE 5
+#define CELL_SIZE 20
 #define ROWS SCREEN_HEIGHT / CELL_SIZE
 #define COLUMNS SCREEN_WIDTH / CELL_SIZE
-#define GRID_WIDTH 0 
+#define GRID_WIDTH 1 
 #define GRID_COLOR 0x706260
 #define ALIVE 1
 #define DEAD 0
@@ -110,12 +110,14 @@ int main() {
 					color_cell(surface, cell_x, cell_y, ALIVE);
 				}
 			}
-			if (!up && event.type == SDL_MOUSEBUTTONUP) up = !up;
+//			if (!up && event.type == SDL_MOUSEBUTTONUP) up = !up;
 			if (event.type == SDL_KEYDOWN) {
-				if (up && event.key.keysym.sym == SDLK_SPACE) {
+				if (event.key.keysym.sym == SDLK_SPACE) {
+					if (up) {
+						SDL_SetWindowTitle(window, TITLE_1);
+						initialise_cells(surface, environment);
+					}
 					up = !up;
-					SDL_SetWindowTitle(window, TITLE_1);
-					initialise_cells(surface, environment);
 				}
 			}
 		}

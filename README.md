@@ -1,5 +1,5 @@
 
-# Conway's Game of Lif using SDL2
+# Conway's Game of Life using SDL2
 
 Reference: https://en.wikipedia.org/wiki/Conway's_Game_of_Life
 

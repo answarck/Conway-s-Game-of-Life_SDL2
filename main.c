@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <stdlib.h>
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 800
-#define CELL_SIZE 5
+#define SCREEN_WIDTH 1000
+#define SCREEN_HEIGHT 1000
+#define CELL_SIZE 20
 #define ROWS SCREEN_HEIGHT / CELL_SIZE
 #define COLUMNS SCREEN_WIDTH / CELL_SIZE
 #define GRID_WIDTH 1 
@@ -103,7 +103,7 @@ int main() {
 	SDL_Window *window = SDL_CreateWindow(TITLE_DRAW,  SDL_WINDOWPOS_CENTERED,  SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	SDL_Surface *surface = SDL_GetWindowSurface(window);
 	SDL_Event event;
-	int running = 1, up = 0, grid = 0, delete = 0;
+	int running = 1, up = 0, grid = 1, delete = 0;
 	Cell** environment = create_environment();
 	initialise_cells(surface, environment);
 	while (running) {
@@ -112,7 +112,7 @@ int main() {
 			if (event.type == SDL_MOUSEMOTION) {
 				if (!up && event.motion.state != 0) {
 					SDL_MouseMotionEvent pos = event.motion;
-					if ((pos.x >= 0 && pos.x <= SCREEN_WIDTH) && (pos.y >= 0 && pos.y <= SCREEN_HEIGHT)) {
+					if ((pos.x > 0 && pos.x < SCREEN_WIDTH) && (pos.y > 0 && pos.y < SCREEN_HEIGHT)) {
 						int cell_x = event.motion.x / CELL_SIZE;
 						int cell_y = event.motion.y / CELL_SIZE;
 						environment[cell_y][cell_x].x = cell_x;
@@ -146,7 +146,7 @@ int main() {
 		if (up) simulate(surface, environment);
 		if (grid) draw_grid(surface, GRID_COLOR);
 		SDL_UpdateWindowSurface(window);
-		SDL_Delay(up ? 105 : 0);
+		SDL_Delay(up ? 60 : 0);
 	}
 	free_environment(environment);
 	SDL_DestroyWindow(window);

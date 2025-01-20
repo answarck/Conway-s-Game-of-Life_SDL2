@@ -21,7 +21,7 @@ typedef struct Cell {
 	int alive;
 } Cell;
 
-void free_environment(Cell** environment) {
+void free_environment(Cell **environment) {
 	for (int i = 0; i < ROWS; i++) free(environment[i]);
 	free(environment);
 }
@@ -31,7 +31,7 @@ Cell** create_environment() {
 	return environment;
 }
 
-void draw_grid(SDL_Surface* surface, Uint32 color) {
+void draw_grid(SDL_Surface *surface, Uint32 color) {
 	for (int i = 0; i < ROWS; i++) {
 		SDL_Rect colmn = {i * CELL_SIZE, 0, GRID_WIDTH, SCREEN_HEIGHT};
 		SDL_FillRect(surface, &colmn, color);
@@ -50,7 +50,7 @@ void color_cell(SDL_Surface *surface, int x, int y, int state) {
 
 }
 
-void initialise_cells(SDL_Surface *surface, Cell** environment) {
+void initialise_cells(SDL_Surface *surface, Cell **environment) {
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
 			Cell Cell = {j, i, DEAD};
@@ -62,10 +62,9 @@ void initialise_cells(SDL_Surface *surface, Cell** environment) {
 }
 
 
-void simulate(SDL_Surface *surface, Cell** environment) {
+void simulate(SDL_Surface *surface, Cell **environment) {
 	Cell** temp_environment = create_environment();
 	for (int i = 0; i < ROWS; i++) {
-		temp_environment[i] = (Cell* )malloc(COLUMNS * sizeof(Cell));
 		for (int j = 0; j < COLUMNS; j++) {
 			temp_environment[i][j] = environment[i][j];
 		}
